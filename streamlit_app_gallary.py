@@ -10,7 +10,7 @@ from st_aggrid import AgGrid
 import plotly.express as px
 import io 
 
-st.set_page_config(page_title="Sharone's Streamlit App Gallary", page_icon="", layout="wide")
+st.set_page_config(page_title="Sharone's Streamlit App Gallery", page_icon="", layout="wide")
 
 sysmenu = '''
 <style>
@@ -24,7 +24,7 @@ logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
 profile = Image.open(r'C:\Users\13525\Desktop\medium_profile.png')
 
 with st.sidebar:
-    choose = option_menu("App Gallary", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
+    choose = option_menu("App Gallery", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
                          icons=['house', 'camera fill', 'kanban', 'book','person lines fill'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
@@ -42,7 +42,7 @@ if choose == "About":
         st.markdown(""" <style> .font {
         font-size:35px ; font-family: 'Cooper Black'; color: #FF9633;} 
         </style> """, unsafe_allow_html=True)
-        st.markdown('<p class="font">About the Author</p>', unsafe_allow_html=True)
+        st.markdown('<p class="font">About the Creator</p>', unsafe_allow_html=True)
         
     with col2:               # To display brand logo
         
