@@ -2,22 +2,13 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 from  PIL import Image
-import streamlit as st
 import numpy as np
 import cv2
-from  PIL import ImageChops
+#from  PIL import ImageChops
 import pandas as pd
-from streamlit_pandas_profiling import st_profile_report
-from pandas_profiling import ProfileReport
 from st_aggrid import AgGrid
-import streamlit as st
-import pandas as pd 
-import numpy as np
 import plotly.express as px
-from  PIL import Image
 import io 
-
-
 
 st.set_page_config(page_title="Sharone's Streamlit App Gallary", page_icon="", layout="wide")
 
@@ -31,9 +22,8 @@ st.markdown(sysmenu,unsafe_allow_html=True)
 #Add a logo (optional) in the sidebar
 logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
 profile = Image.open(r'C:\Users\13525\Desktop\medium_profile.png')
-#st.sidebar.image(logo, width=130 )
+
 with st.sidebar:
-    
     choose = option_menu("App Gallary", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
                          icons=['house', 'camera fill', 'kanban', 'book','person lines fill'],
                          menu_icon="app-indicator", default_index=0,
@@ -44,32 +34,6 @@ with st.sidebar:
         "nav-link-selected": {"background-color": "#02ab21"},
     }
     )
-    
-
-# choose = option_menu("App Gallary", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
-#                         icons=['house', 'camera fill', 'kanban', 'book','person lines fill'],
-#                         menu_icon="app-indicator", default_index=0,
-#                         styles={
-#     "container": {"padding": "3!important", "background-color": "#fafafa"},
-#     "icon": {"color": "orange", "font-size": "20px"}, 
-#     "nav-link": {"font-size": "12px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-#     "nav-link-selected": {"background-color": "#0d0000"},
-# },
-# orientation='horizontal'
-# )
-
-
-with st.sidebar.form(key='columns_in_form1',clear_on_submit=True): #set clear_on_submit=True so that the form will be reset/cleared once it's submitted
-    st.write('<style>div.row-widget.stRadio > div{flex-direction:row;} </style>', unsafe_allow_html=True) #Make horizontal radio buttons
-    rating=st.radio("Please rate the app",('1','2','3','4','5'),index=4)    #Use radio buttons for ratings
-    #text=st.text_input(label='Please leave your feedback here') #Collect user feedback
-    submitted = st.form_submit_button('Submit')
-
-
-
-
-
-#st.sidebar.image(logo,  width=120)
 
 if choose == "About":
 #Add the cover image for the cover page. Used a little trick to center the image
@@ -83,16 +47,10 @@ if choose == "About":
     with col2:               # To display brand logo
         
         st.image(logo, width=130 )
-    st.write("Sharone Li is a data science practitioner, enthusiast and blogger. She writes data science articles and tutorials about Python, data visualization, Streamlit, etc. She is also an amatuer violinist who loves classical music.\n\nTo know more about Sharone, pelase visit her Medium blog site at: https://medium.com/@insightsbees")    
+    st.write("Sharone Li is a data science practitioner, enthusiast, and blogger. She writes data science articles and tutorials about Python, data visualization, Streamlit, etc. She is also an amateur violinist who loves classical music.\n\nTo read Sharone's data science posts, pelase visit her Medium blog at: https://medium.com/@insightsbees")    
     st.image(profile, width=700 )
 
-
-
-
-    
-
 elif choose == "Photo Editing":
-    #Create two columns with different width
     col1, col2 = st.columns( [0.8, 0.2])
     with col1:               # To display the header text using css style
         st.markdown(""" <style> .font {
@@ -122,34 +80,6 @@ elif choose == "Photo Editing":
             blur_image = cv2.GaussianBlur(inv_gray, (slider,slider), 0, 0)
             sketch = cv2.divide(gray_scale, 255 - blur_image, scale=256)
             st.image(sketch, width=300)
-
-# elif choose == "Data Profiling":
-#     # Streamlit book properties
-#     #Add an app title. Use css to style the title
-#     st.markdown(""" <style> .font {                                          
-#         font-size:30px ; font-family: 'Cooper Black'; color: #FF9633;} 
-#         </style> """, unsafe_allow_html=True)
-#     st.markdown('<p class="font">Import your data and generate a Pandas data profiling report easily...</p>', unsafe_allow_html=True)
-
-
-#     uploaded_file = st.file_uploader("Upload your csv file:", type=['csv'])
-#     if uploaded_file is not None:
-#         df=pd.read_csv(uploaded_file)
-#         st.write(df.head())
-        
-#         if st.button('Generate Report'):
-            
-#             profile=ProfileReport(df,
-#                 minimal=True,
-#                 title="User uploaded table",
-#                 progress_bar=True,
-#                 dataset={
-#                     "description": 'This profiling report was generated by Insights Bees',
-#                     "copyright_holder": 'Insights Bees',
-#                     "copyright_year": '2022'
-#                 }) 
-
-#             st_profile_report(profile)
 
 elif choose == "Project Planning":
 #Add a file uploader to allow users to upload their project plan file
@@ -210,11 +140,8 @@ elif choose == "Project Planning":
         else:
             st.write('---') 
    
-    else:
-        st.warning('You need to upload a csv file.')
 
 elif choose == "Python e-Course":
-
     st.markdown(""" <style> .font {
     font-size:35px ; font-family: 'Cooper Black'; color: #FF9633;} 
     </style> """, unsafe_allow_html=True)
