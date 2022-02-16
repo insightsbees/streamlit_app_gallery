@@ -10,14 +10,14 @@ from st_aggrid import AgGrid
 import plotly.express as px
 import io 
 
-st.set_page_config(page_title="Sharone's Streamlit App Gallery", page_icon="", layout="wide")
+#st.set_page_config(page_title="Sharone's Streamlit App Gallery", page_icon="", layout="wide")
 
-sysmenu = '''
-<style>
-#MainMenu {visibility:hidden;}
-footer {visibility:hidden;}
-'''
-st.markdown(sysmenu,unsafe_allow_html=True)
+# sysmenu = '''
+# <style>
+# #MainMenu {visibility:hidden;}
+# footer {visibility:hidden;}
+# '''
+#st.markdown(sysmenu,unsafe_allow_html=True)
 
 #Add a logo (optional) in the sidebar
 logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
@@ -35,6 +35,9 @@ with st.sidebar:
     }
     )
 
+
+logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
+profile = Image.open(r'C:\Users\13525\Desktop\medium_profile.png')
 if choose == "About":
 #Add the cover image for the cover page. Used a little trick to center the image
     col1, col2 = st.columns( [0.8, 0.2])
@@ -76,8 +79,7 @@ elif choose == "Photo Editing":
             converted_img = np.array(image.convert('RGB')) 
             gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
             inv_gray = 255 - gray_scale
-            slider = st.sidebar.slider('Adjust the intensity', 25, 255, 125, step=2)
-            blur_image = cv2.GaussianBlur(inv_gray, (slider,slider), 0, 0)
+            blur_image = cv2.GaussianBlur(inv_gray, (125,125), 0, 0)
             sketch = cv2.divide(gray_scale, 255 - blur_image, scale=256)
             st.image(sketch, width=300)
 
@@ -148,7 +150,7 @@ elif choose == "Python e-Course":
     st.markdown('<p class="font">Learn Python for Data Science</p>', unsafe_allow_html=True)
 
     st.subheader('Import Data into Python')
-    st.markdown('To start a data science project in Python, you will need to first import your data into a Pandas data frame. Often times we have our raw data stored in a local folder in csv format. Therefore let\'s learn how to use Pandas\' read_csv method to read our sample data into Python.\n\n Below is the code to import the data into Python. Notice that in line 2, we use pd.read_csv() method by specifying the file path within the brackets to import the csv data into Python and store it in a Pandas data frame. We name this pandas data frame as df.\n\n You will notice that we also put \'r\' before the file path. This is because the path contains backslashes and they are treated as an escape character. So if you have, say, \\t in a filename Windows will treat that as a tab character instead of a path separator. An alternative way is to specify file paths with forward slashes.')
+    st.markdown('To start a data science project in Python, you will need to first import your data into a Pandas data frame. Often times we have our raw data stored in a local folder in csv format. Therefore let\'s learn how to use Pandas\' read_csv method to read our sample data into Python.')
 
     #Display the first code snippet
     code = '''import pandas as pd #import the pandas library\ndf=pd.read_csv(r'C:\\Users\\13525\\Desktop\\ecourse_app\\ecourse_streamlit\\data.csv') #read the csv file into pandas\ndf.head() #display the first 5 rows of the data'''
@@ -198,7 +200,7 @@ elif choose == "Contact":
     with st.form(key='columns_in_form2',clear_on_submit=True): #set clear_on_submit=True so that the form will be reset/cleared once it's submitted
         #st.write('Please help us improve!')
         Name=st.text_input(label='Please Enter Your Name') #Collect user feedback
-        Email=st.text_input(label='Please Enter Email') #Collect user feedback
+        Email=st.text_input(label='Please Enter Your Email') #Collect user feedback
         Message=st.text_input(label='Please Enter Your Message') #Collect user feedback
         submitted = st.form_submit_button('Submit')
         if submitted:
